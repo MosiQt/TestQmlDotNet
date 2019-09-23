@@ -4,26 +4,17 @@ namespace SkeletonApp.Model
 {
     internal sealed class Project
     {
-        private static string _loremIpsum = @"Some text, some text, some text, some text, some text.";
         public Project(int id)
         {
             Id = id;
             Title = $"Lorem ipsum {Id}";
-            Text = _loremIpsum;
-            Summary = $"{Title} "; 
-            UpdateTime = new DateTime(2019, 06, 01).AddDays(Id * 3);
-            ImagePreview = $"1.png";
-            Image = $"1.png";
+            Summary = "Summary"; 
+            UpdateTime = "1/1/2000";
         }
 
-        public int Id { get; }
+        public int Id {get; set;}
         public string Title { get; set;}
-        public string Text { get; }
-        public string Summary { get; }
-
-        public string ImagePreview { get; }
-
-        public string Image { get; }
-        public DateTime UpdateTime { get; set; }
+        public string Summary { get; set;}
+        public string UpdateTime { get; set; }
     }
 }

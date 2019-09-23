@@ -11,8 +11,6 @@ Pane {
 	property var style
 	property int scrollWidth: scrollBar.visible ? scrollBar.width : 0
 	signal itemClicked(int projectId)
-	signal openProjectRequested(var project)
-	signal switchToProjectRequested(var project)
 
 	Universal.background: style.background
 	Material.background: style.background
@@ -25,12 +23,13 @@ Pane {
 
 		delegate: FeedItemControl {
 			width: parent.width
+			property var prj;
 			MouseArea {
 				anchors.fill: parent
 				onClicked: {
 
-                    var project = control.feedViewModel.getProjectViewModel(modelData.projectId)
-                    project.changeTitle();  // here project title is changed but the they are not updated in the delegate (FeedItemControl)
+                    prj = control.feedViewModel.getProjectViewModel(modelData.projectId)
+                    prj.changeProperties();		// now the three properties are changed, but in the view only the last one is updated!!!
 				}
 			}
 		}

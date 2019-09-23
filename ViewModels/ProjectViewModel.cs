@@ -23,25 +23,35 @@ namespace SkeletonApp.ViewModels
                 return project.Title;
             }
             set {
+                if (project.Title == value)
+                {
+                    return;
+                }
                 project.Title = value;
                 this.ActivateSignal("titleChanged");
             }
         }
 
-        public string Summary => project.Summary;
-
-        public string Text => project.Text;
-
         [NotifySignal]
-        public string Image => project.Image;
+        public string Summary {
+            get {
+                return project.Summary;
+            }
+            set {
+                project.Summary = value;
+                this.ActivateSignal("summaryChanged");
+            }
+        }
 
-        [NotifySignal]
-        public string ImagePreview => project.ImagePreview;
-
-        public void ChangeTitle()
+        static int updateCounter = 0;
+        public void ChangeProperties()
         {
-            Console.WriteLine("Title about to change");
-            Title = "Hello!";
+            updateCounter++;
+            UpdateTime = "new datetime (" + updateCounter.ToString() + ")";
+            Summary = "new summary (" + updateCounter.ToString() + ")";
+            Title = "new title (" + updateCounter.ToString() + ")";
+            
+            Console.WriteLine("UpdateTime, Summary and Title are changed");
         }
 
         [NotifySignal]
@@ -54,21 +64,14 @@ namespace SkeletonApp.ViewModels
 
             set
             {
-                var newTime = Convert.ToDateTime(value);
-                if (project.UpdateTime == newTime)
+                if (project.UpdateTime == value)
                 {
                     return;
                 }
 
-                project.UpdateTime = newTime;
+                project.UpdateTime = value;
+                this.ActivateSignal("updateTimeChanged");
             }
-        }
-
-        public async Task<string> PublishAsync()
-        {
-            await Task.Delay(10000);
-            UpdateTime = DateTime.Now.ToString();
-            return UpdateTime;
         }
     }
 }

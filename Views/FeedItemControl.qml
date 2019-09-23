@@ -24,30 +24,15 @@ ItemDelegate {
 		leftInset: horizontalPadding - control.style.insetHDiff
 		rightInset: horizontalPadding - control.style.insetHDiff
 
-		Row {
-			id: rootItem
-			spacing: control.style.imageSpacing
-			anchors.fill: parent
-
-			Image {
-				id: previewImg
-				anchors.verticalCenter: parent.verticalCenter
-				source: modelData.imagePreview
-			}
-
-			Column {
-				id: textColumn
-				anchors.top: parent.top
-				spacing: control.style.titleSpacing
-				width: parent.width - parent.spacing - previewImg.width
-				RowLayout {
+				Row {
 					id: titleHeader
-					width: parent.width
+					spacing: 50;
+					anchors.fill: parent
 
 					Label {
 						id: titleLabel
 						verticalAlignment: Text.AlignTop
-						text: modelData.title
+						text: modelData.title					// title
 						Layout.fillWidth: true
 						font {
 							weight: Font.DemiBold
@@ -55,16 +40,21 @@ ItemDelegate {
 						}
 					}
 					Label {
-						horizontalAlignment: Text.AlignRight
 						verticalAlignment: Text.AlignTop
-						text: modelData.updateTime
+						text: modelData.summary					// summary
 						font {
 							italic: true
 							pixelSize: control.style.timeFontPixelSize
 						}
 					}
-				}
-			}
-		} // Row rootItem			
+					Label {
+						verticalAlignment: Text.AlignTop
+						text: modelData.updateTime				// updateTime
+						font {
+							italic: true
+							pixelSize: control.style.timeFontPixelSize
+						}
+					}
+				}		
 	}
 }
